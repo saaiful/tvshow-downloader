@@ -31,9 +31,9 @@
 				<tbody>
 				@foreach($shows as $key=>$show)
 					<tr>
-						<td>{{ $key+1 }}. <a href="{{ url('show/'.$show->id) }}">{{ $show->name }}</a></td>
-						<td><a href="{{ url('episode/'.$show->p_episode) }}">{{ $show->p_episode }}</a></td>
-						<td><a href="{{ url('episode/'.$show->n_episode) }}">{{ $show->n_episode }}</a></td>
+						<td>{{ $show->id }}. <a href="{{ url('show/'.$show->id) }}">{{ $show->name }}</a></td>
+						<td>{{ App\ShowMeta::epName($show->p_episode) }}</a></td>
+						<td>{{ App\ShowMeta::epName($show->n_episode) }}</a></td>
 						<td>{{ $show->season }}</td>
 						<td>{{ $show->episode }}</td>
 					</tr>
