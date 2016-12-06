@@ -4,12 +4,14 @@
 	<div class="col-md-4">
 		<h3>{{ $show->name }}</h3>
 		<img style="width: 100%" src="{{ $show->cover }}" alt="{{ $show->name }}"><br><br>
+		<button onclick="updateInfo();" type="button" class="btn btn-block btn-info">Update Information</button><br>
 		<div class="alert alert-info">
 			<strong>Season</strong>: {{ $show->season }}
 		</div>
 		<div class="alert alert-info">
 			<strong>Episode</strong>: {{ $show->episode }}
 		</div>
+
 	</div>
 	<div class="col-md-8">
 		<p>{!! $show->summary !!}</p>
@@ -43,4 +45,19 @@
 		</table>
 	</div>
 </div>
+<script type="text/javascript">
+	function updateInfo() {
+		$.ajax({
+			dataType: "json",
+			url: "{{ url('/add-show-ajax?id='.$show->tvmaze_id) }}",
+			type: "GET",
+			success: function(data){
+				swal("Details Updated!","","success");
+				setTimeout(function() {
+					window.location.reload();
+				}, 2000);
+			}
+		});
+	}
+</script>
 @endsection
