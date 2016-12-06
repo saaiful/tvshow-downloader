@@ -12,10 +12,10 @@ class TorrentController extends Controller {
 			$name = @$_GET['name'];
 			$_id = @$_GET['id'];
 		}
-		preg_match("/(e[0-9]+|E[0-9]+)/", $name, $m);
+		preg_match("/(s[0-9]e[0-9]+)/i", $name, $m);
 		$s = @$m[1];
 		$ch = new Curl();
-		$result = $ch->get('https://kickass.cd/search.php?q=' . $name);
+		$result = $ch->get('https://kickass.cd/usearch/' . $name . "/");
 		$html = str_get_html($result);
 		if (!$html) {
 			return response()->json("Try Again!", 500);

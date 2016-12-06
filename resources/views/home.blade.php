@@ -67,7 +67,7 @@
 				var html = '';
 				$.each(data.result, function(index,value){
 					html += "<tr>";
-					html += "	<td>"+ value.gid +"</td>";
+					html += "	<td>"+ value.bittorrent.info.name +"</td>";
 					html += "	<td>"+ formatBytes(value.totalLength,1) +"</td>";
 					html += "	<td>"+ formatBytes(value.completedLength,1) +" ("+pcom(value.totalLength,value.completedLength)+"%)</td>";
 					html += "	<td>"+ formatBytes(value.downloadSpeed,1) +"</td>";
