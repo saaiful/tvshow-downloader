@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 use App\ShowMeta;
 use Aria2;
+use Curl;
 
 class TorrentController extends Controller {
 
-	public function findTorent($name = '', $id = '') {
-
+	public function findTorrent($name = '', $id = '') {
 		if ($name == '') {
 			$name = @$_GET['name'];
 			$_id = @$_GET['id'];
@@ -15,8 +15,11 @@ class TorrentController extends Controller {
 		preg_match("/(e[0-9]+|E[0-9]+)/", $name, $m);
 		$s = @$m[1];
 		$ch = new Curl();
-		$result = $ch->get('https: //kickass.cd/search.php?q=' . $name);
+		$result = $ch->get('https://kickass.cd/search.php?q=' . $name);
 		$html = str_get_html($result);
+		if (!$html) {
+			return response()->json("Try Again!", 500);
+		}
 		$x = [];
 		foreach ($html->find('tr') as $key => $value) {
 			try {

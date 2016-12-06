@@ -29,7 +29,8 @@ class Kernel extends ConsoleKernel {
                 ->where('magnet', '')->get();
             foreach ($shows as $key => $show) {
                 $name = sprintf("%s S%02dE%02d", $show->show->name, $show->season, $show->episode);
-                TorrentController::findTorent($name, $show->id);
+                $t = new TorrentController();
+                $t->findTorrent($name, $show->id);
             }
         })->everyThirtyMinutes();
     }
