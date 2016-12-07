@@ -25,7 +25,7 @@
 					@if($show->magnet)
 						<a href="{{ $show->magnet }}">Torrent</a>
 					@else						
-						<a href="javascript:{};" onclick='findTorrent("{{ $show->id }}","{{ $show->show->name.sprintf(" S%02dE%02d",$show->season,$show->episode) }}");'>Find</a>
+						<a href="javascript:{};" onclick='findTorrent("{{ $show->id }}","{{ $show->show->name.sprintf(" S%02dE%02d",$show->season,$show->episode) }}");'>Find &amp; Download</a>
 					@endif
 					</td>
 				</tr>

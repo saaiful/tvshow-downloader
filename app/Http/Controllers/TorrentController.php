@@ -7,12 +7,16 @@ use Curl;
 
 class TorrentController extends Controller {
 
-	public function findTorrent($name = '', $id = '') {
+	public function findTorrent($name = '', $_id = '') {
 		if ($name == '') {
 			$name = @$_GET['name'];
 			$_id = @$_GET['id'];
 		}
 		preg_match("/(s[0-9]e[0-9]+)/i", $name, $m);
+		//  Serach Mod
+		if (preg_match("/S\.H\.I\.E\.L\.D/", $name)) {
+			$name = "Marvels.Agents.of.S.H.I.E.L.D " . @$m[1];
+		}
 		$s = @$m[1];
 		$ch = new Curl();
 		$result = $ch->get('https://kickass.cd/usearch/' . $name . "/");
