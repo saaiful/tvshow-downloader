@@ -20,6 +20,6 @@ This is a simple web application for "Automatic TvShow Download". It's written i
 6. Set a cron job or set a task using windows task scheduler. 
 
 Cron Job: `* * * * * php path_to_you_app/artisan schedule:run >> /dev/null 2>&1`<br>
-Task scheduler : `php path_to_you_app/artisan schedule:run >nul 2>&1`
+Task scheduler : `php path_to_you_app/artisan schedule:run`
 
 All downloads can be found in `storage/downloads`.
