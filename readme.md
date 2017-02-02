@@ -2,7 +2,7 @@
 
 This is a simple web application for "Automatic TvShow Download". It's written in Lumen (php) and use aria2 as torrent downloader. 
 
-![TvShow Downloader](http://i67.tinypic.com/2hem0zr.png)
+![TvShow Downloader](http://i67.tinypic.com/10sb3nl.jpg)
 
 
 ### Data Source

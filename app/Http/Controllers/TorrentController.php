@@ -32,7 +32,7 @@ class TorrentController extends Controller {
 		foreach ($html->find('tr') as $key => $value) {
 			try {
 				$_x = @$value->find('.cellMainLink')[0]->innertext;
-				if (preg_match("/$s.*ettv/i", $_x)) {
+				if (preg_match("/$s.*(ettv|hdtv)/i", $_x)) {
 					$x = [@$value->find('.cellMainLink')[0]->innertext, @$value->find('a[title=Torrent magnet link]')[0]->href];
 					$show = ShowMeta::find($_id);
 					if ($show && strlen($x[1]) > 10) {
