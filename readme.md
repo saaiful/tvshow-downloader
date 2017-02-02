@@ -22,4 +22,7 @@ This is a simple web application for "Automatic TvShow Download". It's written i
 Cron Job: `* * * * * php path_to_you_app/artisan schedule:run >> /dev/null 2>&1`<br>
 Task scheduler : `php path_to_you_app/artisan schedule:run`
 
+* To update show information visit `http://site.com/update-all` or set this on cron/task scheduler (with curl/wget) <br>
+* To download todays show at once visit `http://site.com/auto-download` or set this on cron/task scheduler (with curl/wget) <br>
+
 All downloads can be found in `storage/downloads`.
