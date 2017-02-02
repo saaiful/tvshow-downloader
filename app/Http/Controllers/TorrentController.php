@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Show;
 use App\ShowMeta;
 use Aria2;
 use Curl;
+use Log;
 
 class TorrentController extends Controller {
 
@@ -16,6 +18,8 @@ class TorrentController extends Controller {
 		//  Serach Mod
 		if (preg_match("/S\.H\.I\.E\.L\.D/", $name)) {
 			$name = "Marvels.Agents.of.S.H.I.E.L.D " . @$m[1];
+		}if (preg_match("/DC's/", $name)) {
+			$name = "Legends of Tomorrow " . @$m[1];
 		}
 		$s = @$m[1];
 		$ch = new Curl();
@@ -31,7 +35,7 @@ class TorrentController extends Controller {
 				if (preg_match("/$s.*ettv/i", $_x)) {
 					$x = [@$value->find('.cellMainLink')[0]->innertext, @$value->find('a[title=Torrent magnet link]')[0]->href];
 					$show = ShowMeta::find($_id);
-					if ($show) {
+					if ($show && strlen($x[1]) > 10) {
 						$show->magnet = $x[1];
 						$show->save();
 						$this->startDownload($show->magnet);
@@ -62,5 +66,22 @@ class TorrentController extends Controller {
 		$aria2 = new Aria2();
 		$aria2->remove(@$_GET['id']);
 		return redirect('/');
+	}
+
+	public function updateAll() {
+		$s = Show::all();
+		foreach ($s as $key => $value) {
+			file_get_contents(url('/add-show-ajax?id=' . $value->tvmaze_id));
+		}
+	}
+
+	public function AutoDownload() {
+		$shows = ShowMeta::where('schedule', date('Y-m-d', strtotime('-1 day')))
+			->where('magnet', null)->get();
+		foreach ($shows as $key => $show) {
+			$name = sprintf("%s S%02dE%02d", $show->show->name, $show->season, $show->episode);
+			Log::info($this->findTorrent($name, $show->id));
+			sleep(5);
+		}
 	}
 }

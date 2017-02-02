@@ -18,6 +18,8 @@ $app->get('/torrent', 'TorrentController@findTorrent');
 $app->get('/new-show', function () use ($app) {
 	return view('new-show');
 });
+$app->get('/update-all', 'TorrentController@updateAll');
 $app->get('/add-show-ajax', 'ShowController@addShow');
 $app->get('/aria2-ajax', 'TorrentController@aria2status');
 $app->get('/aria2-remove', 'TorrentController@aria2remove');
+$app->get('/auto-download', 'TorrentController@AutoDownload');

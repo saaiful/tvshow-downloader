@@ -34,7 +34,7 @@ class Kernel extends ConsoleKernel {
                 Log::info($t->findTorrent($name, $show->id));
                 sleep(5);
             }
-        })->everyThirtyMinutes()
+        })->everyMinute()
             ->after(function () {
                 Log::info('Auto torrent search ended @ ' . date("Y-m-d H:i:s"));
             });
